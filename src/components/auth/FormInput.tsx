@@ -26,8 +26,8 @@ const FormInput = ({ label, id, type, value, setValue }: FormInputProps) => {
                             type={type}
                             maxLength={1}
                             value={value[index] || ''}
-                            onChange={(e) => handleOtpChange(e, index)}
-                            className="w-[calc(100%/6-8px)] h-[60px] text-center border focus:outline-none focus:ring-2 focus:ring-blue-800 rounded text-md"
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleOtpChange(e, index)}
+                            className="w-[calc(100%/6-8px)] h-[60px] text-center border focus:outline-none focus:ring-2 focus:ring-blue-800 rounded text-md text-gray-700"
                         />
                     ))}
                 </div>
@@ -38,7 +38,7 @@ const FormInput = ({ label, id, type, value, setValue }: FormInputProps) => {
                     name={id}
                     value={value}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
-                    className="w-full border focus:outline-none focus:ring-2 focus:ring-blue-800 rounded py-1 px-2 text-md"
+                    className="w-full border focus:outline-none focus:ring-2 focus:ring-blue-800 rounded py-1 px-2 text-md text-gray-700"
                 />
             )}
         </div>
