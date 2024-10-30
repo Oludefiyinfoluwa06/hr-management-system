@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "HR Management System",
-  description: "A comprehensive platform designed to streamline human resource processes, enabling efficient employee management, payroll, attendance tracking, performance reviews, and more. Ideal for businesses seeking to optimize HR functions and foster a productive work environment.",
+  description: "A comprehensive platform designed to streamline human resource processes and enabling efficient employee management. Ideal for businesses seeking to optimize HR functions and foster a productive work environment.",
 };
 
 const poppins = Poppins({
