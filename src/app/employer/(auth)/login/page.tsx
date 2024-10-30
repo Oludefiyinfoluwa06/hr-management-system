@@ -6,7 +6,7 @@ import Link from "next/link";
 import Button from "@/components/auth/Button";
 import FormInput from "@/components/auth/FormInput";
 
-const Register = () => {
+const Login = () => {
     const [emailAddress, setEmailAddress] = useState("");
     const [password, setPassword] = useState("");
 
@@ -54,4 +54,4 @@ const Register = () => {
     );
 }
 
-export default Register;
+export default Login;
