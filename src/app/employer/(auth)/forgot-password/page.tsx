@@ -7,6 +7,7 @@ import ResetPasswordForm from "@/components/auth/ResetPasswordForm";
 
 const ForgotPassword = () => {
     const [step, setStep] = useState(1);
+    const [email, setEmail] = useState("");
 
     return (
         <div className="flex flex-col md:flex-row h-screen">
@@ -16,9 +17,9 @@ const ForgotPassword = () => {
             </div>
 
             {step === 1 ? (
-                <ForgotPasswordForm step={step} setStep={setStep} />
+                <ForgotPasswordForm step={step} setStep={setStep} setEmail={setEmail} />
             ) : (
-                <ResetPasswordForm step={step} setStep={setStep} />
+                <ResetPasswordForm step={step} setStep={setStep} email={email} />
             )}
         </div>
     );
