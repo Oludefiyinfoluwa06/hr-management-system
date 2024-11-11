@@ -5,7 +5,7 @@ import { Header } from '@/components/common/layout/Header';
 import { Sidebar } from '@/components/common/layout/Sidebar';
 import { MapPin, Building, DollarSign, Clock } from 'lucide-react';
 
-export function PostJobPage() {
+export default function PostJobPage() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [formData, setFormData] = useState({
         title: '',
@@ -34,7 +34,6 @@ export function PostJobPage() {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Here you would typically submit the form data to your backend
         console.log('Form submitted:', formData);
         setShowSuccess(true);
         setTimeout(() => setShowSuccess(false), 3000);
@@ -323,5 +322,3 @@ export function PostJobPage() {
         </div>
     );
 }
-
-export default PostJobPage;
