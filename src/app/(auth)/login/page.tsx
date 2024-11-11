@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/auth/Button";
 import FormInput from "@/components/auth/FormInput";
-import { login } from "@/services/requests";
+import { login } from "@/services/auth-requests";
 import { useRouter } from "next/navigation";
 import MessageBox from "@/components/auth/MessageBox";
 

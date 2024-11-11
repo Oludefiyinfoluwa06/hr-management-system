@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Button from "@/components/auth/Button";
 import FormInput from "@/components/auth/FormInput";
-import { register } from "@/services/requests";
+import { register } from "@/services/auth-requests";
 import { Roles } from "@/utils/enums";
 import MessageBox from "@/components/auth/MessageBox";
 

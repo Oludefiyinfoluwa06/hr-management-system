@@ -5,7 +5,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import FormInput from "./FormInput";
 import Button from "./Button";
 import MessageBox from "./MessageBox";
-import { resetPassword } from "@/services/requests";
+import { resetPassword } from "@/services/auth-requests";
 
 type ResetPasswordFormProps = {
     step: number;

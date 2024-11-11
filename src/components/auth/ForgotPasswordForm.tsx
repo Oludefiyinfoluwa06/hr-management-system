@@ -3,7 +3,7 @@ import Link from "next/link";
 import FormInput from "./FormInput";
 import Button from "./Button";
 import MessageBox from "./MessageBox";
-import { requestOtp } from "@/services/requests";
+import { requestOtp } from "@/services/auth-requests";
 
 type ForgotPasswordFormProps = {
     step: number;
