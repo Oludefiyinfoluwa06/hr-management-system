@@ -56,7 +56,6 @@ export default function EmployerDashboard() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    {/* Recent Applications */}
                     <div className="lg:col-span-2 bg-white rounded-lg shadow-sm p-6">
                         <div className="flex items-center justify-between mb-4">
                             <h2 className="text-lg font-semibold">Recent Applications</h2>
@@ -69,7 +68,7 @@ export default function EmployerDashboard() {
                                 <div key={i} className="flex items-center gap-4 p-4 border rounded-lg hover:border-blue-200">
                                     <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
                                         <Image
-                                            src="/api/placeholder/48/48"
+                                            src="https://via.placeholder.com/48x48"
                                             alt="Applicant avatar"
                                             width={48}
                                             height={48}

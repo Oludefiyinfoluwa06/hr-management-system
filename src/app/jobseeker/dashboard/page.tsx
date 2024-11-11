@@ -48,7 +48,7 @@ export default function JobSeekerDashboard() {
                                 <div key={i} className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 p-3 md:p-4 border rounded-lg">
                                     <div className="w-10 h-10 md:w-12 md:h-12 bg-gray-100 rounded-lg flex items-center justify-center">
                                         <Image
-                                            src="/api/placeholder/48/48"
+                                            src="https://via.placeholder.com/48x48"
                                             alt="Company logo"
                                             width={48}
                                             height={48}
@@ -104,7 +104,7 @@ export default function JobSeekerDashboard() {
                                 <div className="flex items-center gap-2 md:gap-3 mb-3">
                                     <div className="w-8 h-8 md:w-10 md:h-10 bg-gray-100 rounded-lg flex items-center justify-center">
                                         <Image
-                                            src="/api/placeholder/40/40"
+                                            src="https://via.placeholder.com/48x48"
                                             alt="Company logo"
                                             width={40}
                                             height={40}

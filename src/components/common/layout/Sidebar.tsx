@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Home, Briefcase, Bell, User, Settings, LogOut, X } from 'lucide-react';
+import { Home, Briefcase, Bell, User, LogOut, X, Users } from 'lucide-react';
 
 interface SidebarProps {
     type: 'employer' | 'jobseeker';
@@ -13,15 +13,14 @@ export function Sidebar({ type, isOpen, onClose }: SidebarProps) {
             { href: 'dashboard', icon: Home, label: 'Dashboard' },
             { href: 'jobs', icon: Briefcase, label: 'Jobs' },
             { href: 'applications', icon: Bell, label: 'Applications' },
+            { href: 'employees', icon: Users, label: 'Employees' },
             { href: 'profile', icon: User, label: 'Company Profile' },
-            { href: 'settings', icon: Settings, label: 'Settings' },
         ]
         : [
             { href: 'dashboard', icon: Home, label: 'Dashboard' },
             { href: 'jobs', icon: Briefcase, label: 'Browse Jobs' },
             { href: 'applications', icon: Bell, label: 'My Applications' },
             { href: 'profile', icon: User, label: 'Profile' },
-            { href: 'settings', icon: Settings, label: 'Settings' },
         ];
 
     return (
