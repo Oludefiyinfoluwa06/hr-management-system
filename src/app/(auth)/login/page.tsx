@@ -39,7 +39,11 @@ const Login = () => {
             setSuccess("");
 
             if (result.response) {
-                router.push("/employer/dashboard");
+                if (result.role === "EMPLOYER") {
+                    router.push("/employer/dashboard");
+                } else {
+                    router.push("/jobseeker/dashboard");
+                }
             }
         }, 3000);
     }

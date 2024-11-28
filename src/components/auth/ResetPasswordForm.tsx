@@ -49,7 +49,7 @@ const ResetPasswordForm = ({ step, setStep, email }: ResetPasswordFormProps) => 
             setSuccess("");
 
             if (result.response) {
-                router.push("/employer/login");
+                router.push("/login");
             }
         }, 3000);
     }

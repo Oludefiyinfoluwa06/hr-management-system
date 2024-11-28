@@ -3,7 +3,7 @@
 import { Header } from '@/components/common/layout/Header';
 import { Sidebar } from '@/components/common/layout/Sidebar';
 import { StatCard } from '@/components/common/shared/StatCard';
-import { Calendar, Clock, Eye } from 'lucide-react';
+import { Eye } from 'lucide-react';
 import { useState } from 'react';
 import Image from 'next/image';
 
@@ -23,16 +23,10 @@ export default function JobSeekerDashboard() {
             />
 
             <main className="pt-16 p-4 md:p-6 md:ml-64 md:mt-[60px] mt-[30px]">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-4 md:mb-6">
                     <StatCard
                         title="Applications Sent"
                         value="12"
-                        trend={{ value: 8, isPositive: true }}
-                    />
-                    <StatCard
-                        title="Profile Views"
-                        value="48"
-                        trend={{ value: 12, isPositive: true }}
                     />
                     <StatCard
                         title="Interviews Scheduled"
@@ -40,7 +34,7 @@ export default function JobSeekerDashboard() {
                     />
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
                     <div className="lg:col-span-2 bg-white rounded-lg shadow-sm p-4 md:p-6">
                         <h2 className="text-base md:text-lg font-semibold mb-3 md:mb-4">Recent Applications</h2>
                         <div className="space-y-3 md:space-y-4">
@@ -64,31 +58,6 @@ export default function JobSeekerDashboard() {
                                     </div>
                                     <div className="px-2 md:px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs md:text-sm">
                                         In Review
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="bg-white rounded-lg shadow-sm p-4 md:p-6">
-                        <h2 className="text-base md:text-lg font-semibold mb-3 md:mb-4">Upcoming Interviews</h2>
-                        <div className="space-y-3 md:space-y-4">
-                            {[1, 2].map((i) => (
-                                <div key={i} className="p-3 md:p-4 border rounded-lg">
-                                    <div className="flex items-center gap-2 text-xs md:text-sm text-gray-600 mb-2">
-                                        <Calendar size={16} />
-                                        <span>Tomorrow, 10:00 AM</span>
-                                    </div>
-                                    <h3 className="font-semibold">Technical Interview</h3>
-                                    <p className="text-xs md:text-sm text-gray-600 mb-2">TechCorp Inc.</p>
-                                    <div className="flex items-center gap-3 md:gap-4 text-xs md:text-sm">
-                                        <div className="flex items-center gap-1 text-gray-600">
-                                            <Clock size={16} />
-                                            <span>45 min</span>
-                                        </div>
-                                        <button className="text-blue-600 hover:underline">
-                                            Join Call
-                                        </button>
                                     </div>
                                 </div>
                             ))}

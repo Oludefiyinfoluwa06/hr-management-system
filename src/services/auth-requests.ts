@@ -1,7 +1,7 @@
 import axios from "axios";
 import { config } from "@/utils/config";
 import { Roles } from "@/utils/enums";
-import { setCookie } from "@/app/actions";
+import { setCookie, deleteCookie } from "@/app/actions";
 
 export const register = async (companyName: string, userName: string, email: string, password: string, role: Roles | string) => {
     try {
@@ -24,7 +24,8 @@ export const login = async (email: string, password: string) => {
         await setCookie('jwt_token', response.data.accessToken);
 
         return {
-            response: response.data.message
+            response: response.data.message,
+            role: response.data.user.role,
         };
     } catch (error: any) {
         return {
@@ -60,4 +61,8 @@ export const resetPassword = async (otp: string, email: string, password: string
             error: error.response.data.message
         };
     }
+}
+
+export const logout = async () => {
+    await deleteCookie('jwt_token');
 }
