@@ -38,7 +38,7 @@ export default function Applications() {
         }
     ]);
 
-    const statusIcons = {
+    const statusIcons: any = {
         'In Review': <Clock size={16} />,
         'Accepted': <CheckCircle size={16} />,
         'Rejected': <XCircle size={16} />
