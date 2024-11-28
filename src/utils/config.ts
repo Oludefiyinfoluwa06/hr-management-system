@@ -1,3 +1,3 @@
 export const config = {
-    BASE_API_URL: "http://localhost:5000",
+    BASE_API_URL: "http://khr-server.vercel.app",
 }
