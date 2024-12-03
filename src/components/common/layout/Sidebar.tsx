@@ -14,7 +14,6 @@ export function Sidebar({ type, isOpen, onClose }: SidebarProps) {
         ? [
             { href: '/employer/dashboard', icon: Home, label: 'Dashboard' },
             { href: '/employer/jobs', icon: Briefcase, label: 'Jobs' },
-            { href: '/employer/applications', icon: Bell, label: 'Applications' },
             { href: '/employer/employees', icon: Users, label: 'Employees' },
             { href: '/employer/profile', icon: User, label: 'Company Profile' },
         ]

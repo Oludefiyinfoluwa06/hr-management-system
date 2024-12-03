@@ -1,7 +1,7 @@
 import axios from "axios";
 import { config } from "@/utils/config";
 import { Roles } from "@/utils/enums";
-import { setCookie, deleteCookie } from "@/app/actions";
+import { setCookie, deleteCookie, getCookie } from "@/app/actions";
 
 export const register = async (companyName: string, userName: string, email: string, password: string, role: Roles | string) => {
     try {
@@ -30,6 +30,25 @@ export const login = async (email: string, password: string) => {
     } catch (error: any) {
         return {
             error: error.response.data.message
+        };
+    }
+}
+
+export const getUser = async () => {
+    try {
+        const token = await getCookie('jwt_token');
+        const response = await axios.get(`${config.BASE_API_URL}/auth/user`, {
+            headers: {
+                Authorization: `Bearer ${token?.value}`,
+            },
+        });
+
+        return {
+            response: response.data,
+        };
+    } catch (error: any) {
+        return {
+            error: error.response.data.message || 'An error occurred',
         };
     }
 }

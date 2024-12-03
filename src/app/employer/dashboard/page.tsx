@@ -4,11 +4,22 @@ import { Header } from '@/components/common/layout/Header';
 import { Sidebar } from '@/components/common/layout/Sidebar';
 import { StatCard } from '@/components/common/shared/StatCard';
 import { ArrowRight, Clock } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { getUser } from '@/services/auth-requests';
 
 export default function EmployerDashboard() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [user, setUser] = useState<Record<string, any> | null>(null);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const data = await getUser();
+            setUser(data.response);
+        }
+
+        fetchUser();
+    }, []);
 
     return (
         <div className="bg-gray-50 min-h-screen">
@@ -18,7 +29,7 @@ export default function EmployerDashboard() {
                 onClose={() => setIsSidebarOpen(false)}
             />
             <Header
-                username="TechCorp Inc."
+                username={user?.companyName}
                 onMenuClick={() => setIsSidebarOpen(true)}
             />
 
