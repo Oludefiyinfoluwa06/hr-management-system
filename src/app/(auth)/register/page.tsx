@@ -26,7 +26,9 @@ const Register = () => {
         e.preventDefault();
         setLoading(true);
 
-        const result = await register(companyName, userName, emailAddress, password, role);
+        const finalCompanyName = role === Roles.JOB_SEEKER ? "" : companyName;
+
+        const result = await register(finalCompanyName, userName, emailAddress, password, role);
 
         if (result) {
             setLoading(false);
@@ -62,13 +64,34 @@ const Register = () => {
                 <h1 className="text-blue-800 text-2xl mb-4 font-bold">Register your account</h1>
 
                 <form className="w-full" onSubmit={handleRegister}>
-                    <FormInput
-                        label="Company Name"
-                        id="companyName"
-                        type="text"
-                        value={companyName}
-                        setValue={setCompanyName}
-                    />
+                    <label htmlFor="role">Select a Role</label>
+                    <select
+                        className="w-full border border-gray-300 rounded-md px-4 py-2 text-gray-700 bg-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        value={role}
+                        id="role"
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                            setRole(e.target.value);
+                            if (e.target.value === Roles.JOB_SEEKER) {
+                                setCompanyName("");
+                            }
+                        }}
+                        required
+                    >
+                        <option value="">Select a role</option>
+                        <option value={Roles.EMPLOYER}>Employer</option>
+                        <option value={Roles.JOB_SEEKER}>Job Seeker</option>
+                    </select>
+
+                    {role === Roles.EMPLOYER && (
+                        <FormInput
+                            label="Company Name"
+                            id="companyName"
+                            type="text"
+                            value={companyName}
+                            setValue={setCompanyName}
+                        />
+                    )}
+
                     <FormInput
                         label="Username"
                         id="username"
@@ -90,18 +113,6 @@ const Register = () => {
                         value={password}
                         setValue={setPassword}
                     />
-
-                    <label htmlFor="role">Select a Role</label>
-                    <select
-                        className="w-full border border-gray-300 rounded-md px-4 py-2 text-gray-700 bg-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                        value={role}
-                        id="role"
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setRole(e.target.value)}
-                    >
-                        <option value="">Select a role</option>
-                        <option value={Roles.EMPLOYER}>Employer</option>
-                        <option value={Roles.JOB_SEEKER}>Job Seeker</option>
-                    </select>
 
                     <Button text={loading ? "Loading..." : "Register"} />
                     <p className="text-center mt-3">Already have an account? <Link href="login" className="text-blue-800">Login</Link></p>

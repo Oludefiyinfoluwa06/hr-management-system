@@ -134,15 +134,8 @@ export default function CompanyProfile() {
     const saveProfile = async () => {
         try {
             const token = await getCookie('jwt_token');
-            const formData = new FormData();
 
-            Object.keys(editProfile || {}).forEach((key) => {
-                if (editProfile && editProfile[key] !== undefined) {
-                    formData.append(key, editProfile[key]);
-                }
-            });
-
-            const response = await axios.put(`${config.BASE_API_URL}/company`, formData, {
+            const response = await axios.put(`${config.BASE_API_URL}/company`, editProfile, {
                 headers: {
                     'Authorization': `Bearer ${token?.value}`,
                 },
@@ -184,7 +177,7 @@ export default function CompanyProfile() {
                 onClose={() => setIsSidebarOpen(false)}
             />
             <Header
-                username={user?.companyName}
+                username={user?.userName}
                 onMenuClick={() => setIsSidebarOpen(true)}
             />
 

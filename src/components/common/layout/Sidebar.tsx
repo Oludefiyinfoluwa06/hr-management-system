@@ -4,7 +4,7 @@ import { Home, Briefcase, Bell, User, LogOut, X, Users, FileText } from 'lucide-
 import { logout } from "@/services/auth-requests";
 
 interface SidebarProps {
-    type: 'employer' | 'jobseeker' | 'employee';
+    type: 'employer' | 'jobseeker';
     isOpen: boolean;
     onClose: () => void;
 }
@@ -14,20 +14,16 @@ export function Sidebar({ type, isOpen, onClose }: SidebarProps) {
         ? [
             { href: '/employer/dashboard', icon: Home, label: 'Dashboard' },
             { href: '/employer/jobs', icon: Briefcase, label: 'Jobs' },
+            { href: '/employer/applications', icon: Bell, label: 'Applications' },
             { href: '/employer/employees', icon: Users, label: 'Employees' },
             { href: '/employer/profile', icon: User, label: 'Company Profile' },
         ]
-        : type === 'jobseeker' ? [
+        : [
             { href: '/jobseeker/dashboard', icon: Home, label: 'Dashboard' },
             { href: '/jobseeker/jobs', icon: Briefcase, label: 'Browse Jobs' },
             { href: '/jobseeker/applications', icon: Bell, label: 'My Applications' },
             { href: '/jobseeker/profile', icon: User, label: 'Profile' },
-        ] : [
-            { href: '/employee/dashboard', icon: Home, label: 'Dashboard' },
-            { href: '/employee/applications', icon: FileText, label: 'Applications' },
-            { href: '/employee/jobs', icon: Briefcase, label: 'Jobs' },
-            { href: '/employee/profile', icon: User, label: 'Profile' },
-        ];
+        ]
 
     const router = useRouter();
 

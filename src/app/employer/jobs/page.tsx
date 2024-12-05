@@ -126,7 +126,7 @@ export default function EmployerJobsPage() {
                 onClose={() => setIsSidebarOpen(false)}
             />
             <Header
-                username={user?.companyName}
+                username={user?.userName}
                 onMenuClick={() => setIsSidebarOpen(true)}
             />
 

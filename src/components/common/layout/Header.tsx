@@ -24,7 +24,7 @@ export function Header({ username, onMenuClick }: HeaderProps) {
                 </div>
                 <div
                     className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 cursor-pointer"
-                    onClick={() => router.push('/employer/profile')}
+                    onClick={() => router.push('profile')}
                 >
                     <User
                         color="#2563eb"

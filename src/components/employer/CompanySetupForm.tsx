@@ -86,7 +86,7 @@ export const CompanySetupForm = ({ onSetupComplete }: { onSetupComplete: any }) 
                 onClose={() => setIsSidebarOpen(false)}
             />
             <Header
-                username={user?.companyName}
+                username={user?.userName}
                 onMenuClick={() => setIsSidebarOpen(true)}
             />
 

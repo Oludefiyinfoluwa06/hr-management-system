@@ -3,11 +3,12 @@
 import { useState, useEffect } from 'react';
 import { Header } from '@/components/common/layout/Header';
 import { Sidebar } from '@/components/common/layout/Sidebar';
-import { Users, Plus, Mail, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Users, Plus, Mail, ChevronLeft, ChevronRight, Eye } from 'lucide-react';
 import Link from 'next/link';
 import axios from 'axios';
 import { getCookie } from '@/app/actions';
 import { config } from '@/utils/config';
+import { EmployeeDetailsModal } from '@/components/employer/EmployeeDetailsModal';
 
 export default function Employees() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -19,6 +20,8 @@ export default function Employees() {
     });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [selectedEmployeeId, setSelectedEmployeeId] = useState<string | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const fetchEmployees = async (page = 1) => {
         try {
@@ -63,6 +66,11 @@ export default function Employees() {
         }
     };
 
+    const openEmployeeDetails = (employeeId: string) => {
+        setSelectedEmployeeId(employeeId);
+        setIsModalOpen(true);
+    };
+
     return (
         <div className="bg-gray-50 min-h-screen">
             <Sidebar
@@ -102,6 +110,7 @@ export default function Employees() {
                                 <div className="col-span-2">Employee</div>
                                 <div>Role</div>
                                 <div>Email</div>
+                                <div>Actions</div>
                             </div>
 
                             {employees.length === 0 ? (
@@ -127,6 +136,14 @@ export default function Employees() {
                                                 <Mail size={12} className="text-gray-500" />
                                                 {employee.emailAddress}
                                             </div>
+                                        </div>
+                                        <div>
+                                            <button
+                                                onClick={() => openEmployeeDetails(employee._id)}
+                                                className="text-blue-600 hover:text-blue-800 flex items-center gap-1"
+                                            >
+                                                <Eye size={16} /> View
+                                            </button>
                                         </div>
                                     </div>
                                 ))
@@ -164,6 +181,15 @@ export default function Employees() {
                         </div>
                     </>
                 )}
+
+                <EmployeeDetailsModal
+                    employeeId={selectedEmployeeId}
+                    isOpen={isModalOpen}
+                    onClose={() => {
+                        setIsModalOpen(false);
+                        setSelectedEmployeeId(null);
+                    }}
+                />
             </main>
         </div>
     );

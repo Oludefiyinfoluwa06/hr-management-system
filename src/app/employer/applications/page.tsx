@@ -22,7 +22,7 @@ export default function Applications() {
                 setUser(userData.response);
 
                 const token = await getCookie('jwt_token');
-                const response = await axios.get(`${config.BASE_API_URL}/job-applications`, {
+                const response = await axios.get(`${config.BASE_API_URL}/job-applications/company`, {
                     headers: { 'Authorization': `Bearer ${token?.value}` }
                 });
 

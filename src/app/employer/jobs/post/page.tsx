@@ -145,7 +145,7 @@ export default function PostJobPage() {
                 onClose={() => setIsSidebarOpen(false)}
             />
             <Header
-                username={user?.companyName}
+                username={user?.userName}
                 onMenuClick={() => setIsSidebarOpen(true)}
             />
 
@@ -189,7 +189,7 @@ export default function PostJobPage() {
                                 <div className="flex flex-wrap gap-4 text-sm text-gray-600">
                                     <div className="flex items-center gap-1">
                                         <Building size={16} />
-                                        <span>{user?.companyName}</span>
+                                        <span>{user?.userName}</span>
                                     </div>
                                     <div className="flex items-center gap-1">
                                         <MapPin size={16} />
