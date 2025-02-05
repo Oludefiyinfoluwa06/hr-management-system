@@ -177,7 +177,7 @@ export default function CompanyProfile() {
                 onClose={() => setIsSidebarOpen(false)}
             />
             <Header
-                username={user?.userName}
+                username={user?.companyName}
                 onMenuClick={() => setIsSidebarOpen(true)}
             />
 

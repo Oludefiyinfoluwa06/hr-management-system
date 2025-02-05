@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from '@/components/common/layout/Header';
 import { Sidebar } from '@/components/common/layout/Sidebar';
+import { getUser } from '@/services/auth-requests';
 import axios from 'axios';
 import { config } from '@/utils/config';
 import { getCookie } from '@/app/actions';
@@ -30,6 +31,16 @@ const AddEmployees = () => {
         nextOfKinPhoneNumber: '',
         nextOfKinRelationship: ''
     });
+    const [user, setUser] = useState<Record<string, any> | null>(null);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const data = await getUser();
+            setUser(data.response);
+        }
+
+        fetchUser();
+    }, []);
 
     const handleChange = (e: any) => {
         const { name, value } = e.target;
@@ -95,7 +106,7 @@ const AddEmployees = () => {
                 onClose={() => setIsSidebarOpen(false)}
             />
             <Header
-                username="Company Admin"
+                username={user?.companyName}
                 onMenuClick={() => setIsSidebarOpen(true)}
             />
 
@@ -112,7 +123,7 @@ const AddEmployees = () => {
 
                 {success && (
                     <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
-                        <span className="block sm:inline">Employee added successfully! An invitation email has been sent.</span>
+                        <span className="block sm:inline">Employee added successfully</span>
                     </div>
                 )}
 

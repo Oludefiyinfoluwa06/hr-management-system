@@ -126,7 +126,7 @@ export default function EmployerJobsPage() {
                 onClose={() => setIsSidebarOpen(false)}
             />
             <Header
-                username={user?.userName}
+                username={user?.companyName}
                 onMenuClick={() => setIsSidebarOpen(true)}
             />
 
@@ -168,7 +168,7 @@ export default function EmployerJobsPage() {
                                             onClick={() => handleJobAction(job._id, 'view')}
                                             className="px-4 py-2 text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-50"
                                         >
-                                            View Applications
+                                            View
                                         </button>
                                     </div>
                                 </div>
