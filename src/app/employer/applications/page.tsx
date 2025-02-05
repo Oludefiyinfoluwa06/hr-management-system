@@ -56,7 +56,7 @@ export default function Applications() {
     return (
         <div className="bg-gray-50 min-h-screen">
             <Sidebar
-                type="jobseeker"
+                type="employer"
                 isOpen={isSidebarOpen}
                 onClose={() => setIsSidebarOpen(false)}
             />
