@@ -116,6 +116,13 @@ export default function JobApplicationsPage() {
                             </div>
                         </div>
                         <p className="text-gray-700">{jobDetails.description}</p>
+
+                        <button
+                            onClick={() => router.push('/apply')}
+                            className="mb-4 flex items-center text-gray-600 hover:text-gray-800"
+                        >
+                            Apply
+                        </button>
                     </div>
                 )}
             </main>
