@@ -119,7 +119,7 @@ export default function JobApplicationsPage() {
 
                         <button
                             onClick={() => router.push('/apply')}
-                            className="mb-4 flex items-center text-gray-600 hover:text-gray-800"
+                            className="mt-4 flex items-center text-white bg-blue-600"
                         >
                             Apply
                         </button>
