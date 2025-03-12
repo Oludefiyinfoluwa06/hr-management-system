@@ -118,8 +118,8 @@ export default function JobApplicationsPage() {
                         <p className="text-gray-700">{jobDetails.description}</p>
 
                         <button
-                            onClick={() => router.push('/jobseeker/jobs/jobId/apply')}
-                            className="mt-4 flex items-center text-white bg-blue-600"
+                            onClick={() => router.push(`/jobseeker/jobs/${jobId}/apply`)}
+                            className="mt-4 px-3 py-2 flex items-center text-white bg-blue-600"
                         >
                             Apply
                         </button>
