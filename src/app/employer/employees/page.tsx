@@ -6,6 +6,7 @@ import { Sidebar } from '@/components/common/layout/Sidebar';
 import { Users, Plus, Mail, ChevronLeft, ChevronRight, Eye } from 'lucide-react';
 import Link from 'next/link';
 import axios from 'axios';
+import { getUser } from '@/services/auth-requests';
 import { getCookie } from '@/app/actions';
 import { config } from '@/utils/config';
 import { EmployeeDetailsModal } from '@/components/employer/EmployeeDetailsModal';
@@ -27,6 +28,16 @@ export default function Employees() {
     const [error, setError] = useState(null);
     const [selectedEmployeeId, setSelectedEmployeeId] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [user, setUser] = useState<Record<string, any> | null>(null);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const data = await getUser();
+            setUser(data.response);
+        }
+
+        fetchUser();
+    }, []);
 
     const fetchEmployees = async (page = 1) => {
         try {
@@ -84,7 +95,7 @@ export default function Employees() {
                 onClose={() => setIsSidebarOpen(false)}
             />
             <Header
-                username="Company Admin"
+                username={user?.companyName}
                 onMenuClick={() => setIsSidebarOpen(true)}
             />
 

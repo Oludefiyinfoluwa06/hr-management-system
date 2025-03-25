@@ -56,18 +56,18 @@ export default function Applications() {
     return (
         <div className="bg-gray-50 min-h-screen">
             <Sidebar
-                type="jobseeker"
+                type="employer"
                 isOpen={isSidebarOpen}
                 onClose={() => setIsSidebarOpen(false)}
             />
             <Header
-                username={user?.userName}
+                username={user?.companyName}
                 onMenuClick={() => setIsSidebarOpen(true)}
             />
 
             <main className="pt-16 p-4 md:p-6 md:ml-64 md:mt-[60px] mt-[30px]">
                 <div className="max-w-4xl mx-auto">
-                    <h1 className="text-base md:text-lg font-semibold mb-4">My Applications</h1>
+                    <h1 className="text-base md:text-lg font-semibold mb-4">Applications</h1>
 
                     {applications.length === 0 ? (
                         <div className="text-center text-gray-500 p-4">
