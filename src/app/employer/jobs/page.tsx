@@ -56,7 +56,7 @@ export default function EmployerJobsPage() {
         setIsLoading(true);
         try {
             const token = await getCookie('jwt_token');
-            const response = await axios.get(`${config.BASE_API_URL}/job`, {
+            const response = await axios.get(`${config.BASE_API_URL}/job/company`, {
                 params: {
                     page,
                     limit: pagination.itemsPerPage

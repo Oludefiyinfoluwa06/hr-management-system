@@ -75,9 +75,8 @@ export const resetPassword = async (otp: string, email: string, password: string
             response: response.data.message
         };
     } catch (error: any) {
-        console.log(error);
         return {
-            error: error.response.data.message
+            error: error?.response.data.message || 'An error occurred'
         };
     }
 }
