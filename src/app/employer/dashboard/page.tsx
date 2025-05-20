@@ -88,7 +88,7 @@ export default function EmployerDashboard() {
                         value={jobs || 0}
                     />
                     <StatCard
-                        title="Total Applications"
+                        title="Total Applicants"
                         value={applications.length || 0}
                     />
                 </div>
