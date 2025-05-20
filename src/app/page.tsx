@@ -47,12 +47,12 @@ export default function Home() {
                 and build your dream team.
               </p>
               <div className="space-y-3">
-                <Link
+                {/* <Link
                   href="/employer/jobs/post"
                   className="block w-full px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                 >
                   Post a Job
-                </Link>
+                </Link> */}
                 <Link
                   href="/login"
                   className="block w-full px-6 py-3 border-2 border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
@@ -77,12 +77,12 @@ export default function Home() {
                 and apply with ease.
               </p>
               <div className="space-y-3">
-                <Link
+                {/* <Link
                   href="/jobseeker/jobs"
                   className="block w-full px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                 >
                   Find Jobs
-                </Link>
+                </Link> */}
                 <Link
                   href="/login"
                   className="block w-full px-6 py-3 border-2 border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
@@ -94,7 +94,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto text-center py-12">
+        {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto text-center py-12">
           <div>
             <div className="text-3xl font-bold text-blue-600 mb-2">10k+</div>
             <div className="text-gray-600">Active Jobs</div>
@@ -111,7 +111,7 @@ export default function Home() {
             <div className="text-3xl font-bold text-blue-600 mb-2">15k+</div>
             <div className="text-gray-600">Placements</div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

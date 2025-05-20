@@ -22,7 +22,7 @@ export default function Employees() {
     const [pagination, setPagination] = useState({
         currentPage: 1,
         totalPages: 0,
-        limit: 10
+        limit: 10,
     });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -60,7 +60,7 @@ export default function Employees() {
             setEmployees(results);
             setPagination(prev => ({
                 ...prev,
-                currentPage,
+                currentPage: Number(currentPage),
                 totalPages
             }));
             setError(null);
@@ -189,9 +189,9 @@ export default function Employees() {
                                 </button>
                                 <button
                                     onClick={() => handlePageChange(pagination.currentPage + 1)}
-                                    disabled={pagination.currentPage === pagination.totalPages}
+                                    disabled={pagination.currentPage === pagination.totalPages || pagination.totalPages === 0}
                                     className={`p-2 rounded ${
-                                        pagination.currentPage === pagination.totalPages
+                                        pagination.currentPage === pagination.totalPages || pagination.totalPages === 0
                                             ? 'text-gray-300 cursor-not-allowed'
                                             : 'hover:bg-gray-100 text-gray-600'
                                     }`}

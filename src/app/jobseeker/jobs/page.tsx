@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Header } from '@/components/common/layout/Header';
 import { Sidebar } from '@/components/common/layout/Sidebar';
-import { MapPin, Plus, ChevronLeft, ChevronRight } from 'lucide-react';
+import { MapPin, Plus, ChevronLeft, ChevronRight, Search } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { config } from '@/utils/config';
@@ -40,6 +40,7 @@ export default function JobSeekerJobsPage() {
         itemsPerPage: 10
     });
     const [user, setUser] = useState<Record<string, any> | null>(null);
+    const [title, setTitle] = useState<string>('');
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -69,14 +70,15 @@ export default function JobSeekerJobsPage() {
             setJobs(response.data.results);
             setPagination(prev => ({
                 ...prev,
-                currentPage: response.data.currentPage,
+                currentPage: Number(response.data.currentPage),
                 totalPages: response.data.totalPages,
                 totalItems: response.data.results.length,
             }));
-            setIsLoading(false);
         } catch (err) {
-            setError('Failed to fetch jobs');
-            setIsLoading(false);
+          setError('Failed to fetch jobs');
+          setIsLoading(false);
+        } finally {
+          setIsLoading(false);
         }
     };
 
@@ -104,6 +106,39 @@ export default function JobSeekerJobsPage() {
             setError('Failed to perform action');
         }
     };
+
+    const handleChange = async (e: any) => {
+      setTitle(e.target.value);
+    };
+
+    const handleSearch = async () => {
+      setIsLoading(true);
+
+      try {
+        const token = await getCookie('jwt_token');
+        const response = await axios.get(`${config.BASE_API_URL}/job/search?title=${title}`, {
+          headers: {
+            'Authorization': `Bearer ${token?.value}`,
+          }
+        });
+
+        setJobs(response.data.results);
+        setPagination(prev => ({
+            ...prev,
+            currentPage: Number(response.data.currentPage),
+            totalPages: response.data.totalPages,
+            totalItems: response.data.results.length,
+        }));
+      } catch (error: any) {
+        setError(Array.isArray(error.response.data.message) ? error.response.data.message[0] : error.response.data.message);
+
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+      } finally {
+        setIsLoading(false);
+      }
+    }
 
     if (isLoading) {
         return (
@@ -135,6 +170,25 @@ export default function JobSeekerJobsPage() {
 
             <main className="pt-16 p-4 md:p-6 md:ml-64 md:mt-[60px] mt-[30px]">
                 <div className="space-y-4">
+                    <div className="flex items-center justify-center w-full space-x-3">
+                      <input
+                        type="text"
+                        name="title"
+                        value={title}
+                        onChange={handleChange}
+                        required
+                        placeholder='Search for jobs'
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-blue-500 focus:border-blue-500"
+                      />
+                      <button
+                        onClick={handleSearch}
+                        disabled={!title}
+                        className={`px-4 py-2 ${!title && "cursor-not-allowed"} text-white border border-blue-600 bg-blue-600 rounded-lg hover:bg-blue-400`}
+                      >
+                        <Search size={20} />
+                      </button>
+                    </div>
+
                     {jobs.length === 0 ? (
                         <div className="text-center text-gray-500 p-4">
                             No jobs found.
@@ -194,10 +248,11 @@ export default function JobSeekerJobsPage() {
                         </button>
                         <button
                             onClick={() => handlePageChange(pagination.currentPage + 1)}
-                            disabled={pagination.currentPage === pagination.totalPages}
+                            disabled={pagination.currentPage === pagination.totalPages || pagination.totalPages === 0}
                             className={`p-2 rounded ${
-                                pagination.currentPage === pagination.totalPages
-                                    ? 'text-gray-300 cursor-not-allowed'
+                              pagination.currentPage === pagination.totalPages ||
+                                pagination.totalPages === 0
+                                  ? 'text-gray-300 cursor-not-allowed'
                                     : 'hover:bg-gray-100 text-gray-600'
                             }`}
                         >

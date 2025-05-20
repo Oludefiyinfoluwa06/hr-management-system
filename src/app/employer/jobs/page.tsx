@@ -69,7 +69,7 @@ export default function EmployerJobsPage() {
             setJobs(response.data.results);
             setPagination(prev => ({
                 ...prev,
-                currentPage: response.data.currentPage,
+                currentPage: Number(response.data.currentPage),
                 totalPages: response.data.totalPages,
                 totalItems: response.data.results.length,
             }));
@@ -196,9 +196,9 @@ export default function EmployerJobsPage() {
                         </button>
                         <button
                             onClick={() => handlePageChange(pagination.currentPage + 1)}
-                            disabled={pagination.currentPage === pagination.totalPages}
+                            disabled={pagination.currentPage === pagination.totalPages || pagination.totalPages === 0}
                             className={`p-2 rounded ${
-                                pagination.currentPage === pagination.totalPages
+                                pagination.currentPage === pagination.totalPages || pagination.totalPages === 0
                                     ? 'text-gray-300 cursor-not-allowed'
                                     : 'hover:bg-gray-100 text-gray-600'
                             }`}
