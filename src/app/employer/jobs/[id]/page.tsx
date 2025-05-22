@@ -81,18 +81,18 @@ export default function JobApplicationsPage() {
     return (
         <div className="bg-gray-50 min-h-screen">
             <Sidebar
-                type="jobseeker"
+                type="employer"
                 isOpen={isSidebarOpen}
                 onClose={() => setIsSidebarOpen(false)}
             />
             <Header
-                username={user?.userName}
+                username={user?.companyName}
                 onMenuClick={() => setIsSidebarOpen(true)}
             />
 
             <main className="pt-16 p-4 md:p-6 md:ml-64 md:mt-[60px] mt-[30px]">
                 <button
-                    onClick={() => router.push('/jobseeker/jobs')}
+                    onClick={() => router.push('/employer/jobs')}
                     className="mb-4 flex items-center text-gray-600 hover:text-gray-800"
                 >
                     <ChevronLeft size={20} />
@@ -116,13 +116,6 @@ export default function JobApplicationsPage() {
                             </div>
                         </div>
                         <p className="text-gray-700">{jobDetails.description}</p>
-
-                        <button
-                            onClick={() => router.push(`/jobseeker/jobs/${jobId}/apply`)}
-                            className="mt-4 px-3 py-2 flex items-center text-white bg-blue-600"
-                        >
-                            Apply
-                        </button>
                     </div>
                 )}
             </main>

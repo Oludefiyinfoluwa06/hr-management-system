@@ -6,9 +6,15 @@ import { Sidebar } from '@/components/common/layout/Sidebar';
 import { Users, Plus, Mail, ChevronLeft, ChevronRight, Eye } from 'lucide-react';
 import Link from 'next/link';
 import axios from 'axios';
+import { getUser } from '@/services/auth-requests';
 import { getCookie } from '@/app/actions';
 import { config } from '@/utils/config';
 import { EmployeeDetailsModal } from '@/components/employer/EmployeeDetailsModal';
+
+const truncateEmail = (email: string) => {
+    const [username] = email.split('@');
+    return `${username}@...`;
+};
 
 export default function Employees() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -16,12 +22,22 @@ export default function Employees() {
     const [pagination, setPagination] = useState({
         currentPage: 1,
         totalPages: 0,
-        limit: 10
+        limit: 10,
     });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [selectedEmployeeId, setSelectedEmployeeId] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [user, setUser] = useState<Record<string, any> | null>(null);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const data = await getUser();
+            setUser(data.response);
+        }
+
+        fetchUser();
+    }, []);
 
     const fetchEmployees = async (page = 1) => {
         try {
@@ -44,7 +60,7 @@ export default function Employees() {
             setEmployees(results);
             setPagination(prev => ({
                 ...prev,
-                currentPage,
+                currentPage: Number(currentPage),
                 totalPages
             }));
             setError(null);
@@ -79,7 +95,7 @@ export default function Employees() {
                 onClose={() => setIsSidebarOpen(false)}
             />
             <Header
-                username="Company Admin"
+                username={user?.companyName}
                 onMenuClick={() => setIsSidebarOpen(true)}
             />
 
@@ -106,48 +122,53 @@ export default function Employees() {
                 ) : (
                     <>
                         <div className="bg-white rounded-lg shadow-sm">
-                            <div className="grid grid-cols-6 text-xs md:text-sm font-semibold text-gray-600 px-4 py-3 border-b">
+                            <div className="grid grid-cols-6 text-xs md:text-sm font-semibold text-gray-600 px-4 py-3 border-b sticky top-0 bg-white z-10">
                                 <div className="col-span-2">Employee</div>
-                                <div>Role</div>
-                                <div>Email</div>
-                                <div>Actions</div>
+                                <div className="col-span-1">Role</div>
+                                <div className="col-span-1">Email</div>
+                                <div className="col-span-1">Actions</div>
                             </div>
 
-                            {employees.length === 0 ? (
-                                <div className="text-center py-6 text-gray-500">
-                                    No employees found
-                                </div>
-                            ) : (
-                                employees.map((employee: any) => (
-                                    <div
-                                        key={employee._id}
-                                        className="grid grid-cols-6 items-center px-4 py-3 border-b hover:bg-gray-50 transition"
-                                    >
-                                        <div className="col-span-2 flex items-center gap-3">
-                                            <div>
-                                                <h3 className="font-semibold text-xs md:text-sm">
-                                                    {employee.firstName} {employee.lastName}
-                                                </h3>
-                                            </div>
-                                        </div>
-                                        <div className="text-xs md:text-sm capitalize">{employee.employmentRole}</div>
-                                        <div className="text-xs md:text-sm flex flex-col">
-                                            <div className="flex items-center gap-1">
-                                                <Mail size={12} className="text-gray-500" />
-                                                {employee.emailAddress}
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <button
-                                                onClick={() => openEmployeeDetails(employee._id)}
-                                                className="text-blue-600 hover:text-blue-800 flex items-center gap-1"
-                                            >
-                                                <Eye size={16} /> View
-                                            </button>
-                                        </div>
+                            {/* Scrollable container */}
+                            <div className="max-h-[50vh] overflow-y-auto">
+                                {employees.length === 0 ? (
+                                    <div className="text-center py-6 text-gray-500">
+                                        No employees found
                                     </div>
-                                ))
-                            )}
+                                ) : (
+                                    employees.map((employee: any) => (
+                                        <div
+                                            key={employee._id}
+                                            className="grid grid-cols-6 items-center px-4 py-3 border-b hover:bg-gray-50 transition"
+                                        >
+                                            <div className="col-span-2 flex items-center gap-3">
+                                                <div>
+                                                    <h3 className="font-semibold text-xs md:text-sm">
+                                                        {employee.firstName} {employee.lastName}
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                            <div className="text-xs md:text-sm capitalize col-span-1">{employee.employmentRole}</div>
+                                            <div className="text-xs md:text-sm flex flex-col col-span-1">
+                                                <div className="flex items-center gap-1">
+                                                    <Mail size={12} className="text-gray-500" />
+                                                    <span title={employee.emailAddress}>
+                                                        {truncateEmail(employee.emailAddress)}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div className="col-span-1">
+                                                <button
+                                                    onClick={() => openEmployeeDetails(employee._id)}
+                                                    className="text-blue-600 hover:text-blue-800 flex items-center gap-1"
+                                                >
+                                                    <Eye size={12} /> View
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ))
+                                )}
+                            </div>
                         </div>
 
                         <div className="flex justify-between items-center mt-4">
@@ -168,9 +189,9 @@ export default function Employees() {
                                 </button>
                                 <button
                                     onClick={() => handlePageChange(pagination.currentPage + 1)}
-                                    disabled={pagination.currentPage === pagination.totalPages}
+                                    disabled={pagination.currentPage === pagination.totalPages || pagination.totalPages === 0}
                                     className={`p-2 rounded ${
-                                        pagination.currentPage === pagination.totalPages
+                                        pagination.currentPage === pagination.totalPages || pagination.totalPages === 0
                                             ? 'text-gray-300 cursor-not-allowed'
                                             : 'hover:bg-gray-100 text-gray-600'
                                     }`}

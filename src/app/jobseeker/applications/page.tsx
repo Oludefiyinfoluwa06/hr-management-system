@@ -7,6 +7,7 @@ import { getUser } from '@/services/auth-requests';
 import { getCookie } from '@/app/actions';
 import axios from 'axios';
 import { config } from '@/utils/config';
+import { useRouter } from 'next/navigation';
 
 export default function Applications() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -14,6 +15,7 @@ export default function Applications() {
     const [user, setUser] = useState<Record<string, any> | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const router = useRouter();
 
     useEffect(() => {
         const fetchApplications = async () => {
@@ -28,8 +30,11 @@ export default function Applications() {
 
                 setApplications(response.data);
                 setIsLoading(false);
-            } catch (error) {
-                setError('Failed to fetch applications');
+            } catch (error: any) {
+                if (error.response.data.message === "Set up your profile") {
+                    return router.push('/jobseeker/profile');
+                }
+                setError(error.response.data.message || 'Failed to fetch applications');
                 setIsLoading(false);
             }
         };

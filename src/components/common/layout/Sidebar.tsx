@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from "next/navigation";
-import { Home, Briefcase, Bell, User, LogOut, X, Users, FileText } from 'lucide-react';
+import { Home, Briefcase, Bell, User, LogOut, X, Users, Clock, Archive } from 'lucide-react';
 import { logout } from "@/services/auth-requests";
 
 interface SidebarProps {
@@ -16,12 +16,14 @@ export function Sidebar({ type, isOpen, onClose }: SidebarProps) {
             { href: '/employer/jobs', icon: Briefcase, label: 'Jobs' },
             { href: '/employer/applications', icon: Bell, label: 'Applications' },
             { href: '/employer/employees', icon: Users, label: 'Employees' },
+            { href: '/employer/archives', icon: Archive, label: 'Archives' },
             { href: '/employer/profile', icon: User, label: 'Company Profile' },
         ]
         : [
             { href: '/jobseeker/dashboard', icon: Home, label: 'Dashboard' },
             { href: '/jobseeker/jobs', icon: Briefcase, label: 'Browse Jobs' },
             { href: '/jobseeker/applications', icon: Bell, label: 'My Applications' },
+            { href: '/jobseeker/interview-schedule', icon: Clock, label: 'Interview Schedules' },
             { href: '/jobseeker/profile', icon: User, label: 'Profile' },
         ]
 

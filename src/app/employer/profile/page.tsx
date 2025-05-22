@@ -13,7 +13,7 @@ import {
     Briefcase,
     Save,
     X,
-    Upload
+    Upload,
 } from 'lucide-react';
 import { CompanySetupForm } from '@/components/employer/CompanySetupForm';
 import { cloudinaryConfig, config } from '@/utils/config';
@@ -166,7 +166,7 @@ export default function CompanyProfile() {
     }
 
     if (!companyProfile) {
-        return <CompanySetupForm onSetupComplete={handleSetupComplete} />;
+      return <CompanySetupForm onSetupComplete={handleSetupComplete} />;
     }
 
     return (
@@ -177,7 +177,7 @@ export default function CompanyProfile() {
                 onClose={() => setIsSidebarOpen(false)}
             />
             <Header
-                username={user?.userName}
+                username={user?.companyName}
                 onMenuClick={() => setIsSidebarOpen(true)}
             />
 

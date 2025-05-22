@@ -48,17 +48,17 @@ export default function EmployerDashboard() {
     }, []);
 
     useEffect(() => {
-        const fetchJobs = async (page: number = 1) => {
+        const fetchJobs = async () => {
             setIsLoading(true);
             try {
                 const token = await getCookie('jwt_token');
-                const response = await axios.get(`${config.BASE_API_URL}/job`, {
+                const response = await axios.get(`${config.BASE_API_URL}/job/company/all`, {
                     headers: {
                         'Authorization': `Bearer ${token?.value}`,
                     }
                 });
 
-                setJobs(response.data.totalItems);
+                setJobs(response.data.length);
             } catch (err) {
                 setError('Failed to fetch jobs');
             } finally {
@@ -77,7 +77,7 @@ export default function EmployerDashboard() {
                 onClose={() => setIsSidebarOpen(false)}
             />
             <Header
-                username={user?.userName}
+                username={user?.companyName}
                 onMenuClick={() => setIsSidebarOpen(true)}
             />
 
@@ -88,7 +88,7 @@ export default function EmployerDashboard() {
                         value={jobs || 0}
                     />
                     <StatCard
-                        title="Total Applications"
+                        title="Total Applicants"
                         value={applications.length || 0}
                     />
                 </div>

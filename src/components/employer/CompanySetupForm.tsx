@@ -58,7 +58,8 @@ export const CompanySetupForm = ({ onSetupComplete }: { onSetupComplete: any }) 
                 setSuccess("");
             }, 3000);
 
-            router.push('/employer/profile');
+          onSetupComplete(formData);
+          return router.push('/employer/profile');
         } catch (error: any) {
             setError(Array.isArray(error.response.data.message) ? error.response.data.message[0] : error.response.data.message);
 
@@ -86,7 +87,7 @@ export const CompanySetupForm = ({ onSetupComplete }: { onSetupComplete: any }) 
                 onClose={() => setIsSidebarOpen(false)}
             />
             <Header
-                username={user?.userName}
+                username={user?.companyName}
                 onMenuClick={() => setIsSidebarOpen(true)}
             />
 
